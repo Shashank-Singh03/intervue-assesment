@@ -27,6 +27,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Render uptime health check
+app.get('/health', (_req, res) => res.status(200).send('OK'));
+
 // REST routes
 app.use('/api/poll', pollController);
 
