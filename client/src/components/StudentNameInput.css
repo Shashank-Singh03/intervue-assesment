@@ -1,0 +1,77 @@
+.name-input-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.name-input-card {
+    max-width: 560px;
+    width: 100%;
+}
+
+.name-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.name-subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.name-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.name-input {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    font-family: var(--font);
+    background: var(--option-bg);
+    border: none;
+    border-radius: var(--radius-input);
+    outline: none;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+
+.name-input:focus {
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.btn-continue {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font);
+    color: var(--white);
+    background: var(--primary);
+    border: none;
+    border-radius: var(--radius-button);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-continue:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+.btn-continue:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

@@ -1,0 +1,54 @@
+.floating-chat-wrapper {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.floating-panel {
+    width: 320px;
+    max-height: 420px;
+    overflow-y: auto;
+    border-radius: var(--radius-card);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+    animation: panelSlideUp 0.25s ease;
+}
+
+@keyframes panelSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.floating-chat-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+    transition: background 0.2s, transform 0.15s;
+}
+
+.floating-chat-btn:hover {
+    background: var(--primary-hover);
+    transform: scale(1.06);
+}
+
+.floating-chat-btn:active {
+    transform: scale(0.96);
+}

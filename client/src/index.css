@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #7C3AED;
+  --primary-hover: #6D28D9;
+  --primary-light: #F0EEFB;
+  --bg: #F5F5F5;
+  --white: #FFFFFF;
+  --question-header: #555555;
+  --option-bg: #F3F4F6;
+  --timer-red: #DC2626;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --border: #E5E7EB;
+  --radius-card: 12px;
+  --radius-button: 24px;
+  --radius-input: 8px;
+  --font: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

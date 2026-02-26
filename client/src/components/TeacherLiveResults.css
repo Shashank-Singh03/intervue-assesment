@@ -1,0 +1,150 @@
+.teacher-results-page {
+    min-height: 100vh;
+    padding: 40px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.teacher-results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.teacher-results-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.teacher-timer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.teacher-timer .timer-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--timer-red);
+}
+
+.teacher-timer .timer-value.expired {
+    color: var(--text-secondary);
+}
+
+.teacher-results-card {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.teacher-question-header {
+    background: var(--question-header);
+    padding: 20px 24px;
+    color: var(--white);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.teacher-results-bars {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.teacher-result-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.teacher-result-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 90px;
+}
+
+.teacher-result-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.teacher-result-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.teacher-result-bar-track {
+    flex: 1;
+    height: 28px;
+    background: var(--option-bg);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.teacher-result-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 6px;
+    transition: width 0.4s ease;
+    min-width: 2px;
+}
+
+.teacher-result-pct {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 36px;
+    text-align: right;
+}
+
+.teacher-result-count {
+    font-size: 12px;
+    color: var(--text-secondary);
+    min-width: 28px;
+}
+
+.teacher-results-total {
+    padding: 0 24px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.new-poll-row {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-new-poll {
+    padding: 12px 36px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font);
+    color: var(--white);
+    background: var(--primary);
+    border: none;
+    border-radius: var(--radius-button);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-new-poll:hover {
+    background: var(--primary-hover);
+}

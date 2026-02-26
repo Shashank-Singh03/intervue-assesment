@@ -1,0 +1,36 @@
+.kicked-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.kicked-content {
+    text-align: center;
+    max-width: 500px;
+    padding: 0 20px;
+}
+
+.kicked-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius-button);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.kicked-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.kicked-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}

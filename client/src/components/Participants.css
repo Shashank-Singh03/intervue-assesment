@@ -1,0 +1,96 @@
+.participants-panel {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.participants-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 14px 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--font);
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    font-weight: 600;
+}
+
+.participants-list {
+    padding: 0;
+}
+
+.participants-header-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.col-name,
+.col-action {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.participant-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--option-bg);
+}
+
+.participant-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.kick-btn {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font);
+    color: var(--primary);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.kick-btn:hover {
+    text-decoration: underline;
+}
+
+.no-participants {
+    padding: 24px 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.chat-placeholder {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.chat-coming-soon {
+    color: var(--text-secondary);
+    font-size: 14px;
+}

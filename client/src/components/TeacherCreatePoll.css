@@ -1,0 +1,211 @@
+.create-poll-page {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.create-poll-container {
+    max-width: 640px;
+    width: 100%;
+}
+
+.create-heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.create-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.create-card {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.form-group label,
+.options-section>label,
+.timer-section>label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.question-textarea {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-family: var(--font);
+    background: var(--option-bg);
+    border: none;
+    border-radius: var(--radius-input);
+    resize: vertical;
+    outline: none;
+    color: var(--text-primary);
+    min-height: 80px;
+}
+
+.question-textarea:focus {
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.char-count {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.options-section {
+    margin-bottom: 24px;
+}
+
+.option-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.option-index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.option-input {
+    flex: 1;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: var(--font);
+    background: var(--option-bg);
+    border: none;
+    border-radius: var(--radius-input);
+    outline: none;
+    color: var(--text-primary);
+}
+
+.option-input:focus {
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.correct-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.correct-toggle input[type="radio"] {
+    accent-color: var(--primary);
+}
+
+.correct-label {
+    font-size: 12px;
+}
+
+.remove-option {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: var(--option-bg);
+    color: var(--text-secondary);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-option:hover {
+    background: #fecaca;
+    color: #dc2626;
+}
+
+.add-option-btn {
+    border: none;
+    background: none;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font);
+    padding: 4px 0;
+}
+
+.add-option-btn:hover {
+    text-decoration: underline;
+}
+
+.timer-section {
+    margin-bottom: 24px;
+}
+
+.timer-select {
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: var(--font);
+    background: var(--option-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-input);
+    color: var(--text-primary);
+    cursor: pointer;
+    outline: none;
+    min-width: 160px;
+}
+
+.create-submit-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-ask-question {
+    padding: 12px 36px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font);
+    color: var(--white);
+    background: var(--primary);
+    border: none;
+    border-radius: var(--radius-button);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-ask-question:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+.btn-ask-question:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
