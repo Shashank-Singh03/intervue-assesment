@@ -7,9 +7,8 @@ const { registerPollSocket } = require('./sockets/pollSocket');
 
 const ALLOWED_ORIGINS = [
   'http://localhost:5173',
-  'https://intervue-assessment.web.app',
-  'https://intervue-assessment.firebaseapp.com',
-];
+  process.env.CORS_ORIGIN,       // e.g. https://intervue-assesment.onrender.com
+].filter(Boolean);
 
 const app = express();
 const server = http.createServer(app);
