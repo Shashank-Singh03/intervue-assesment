@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { io } from 'socket.io-client';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:5000';
+const SERVER_URL = (import.meta.env.VITE_SERVER_URL || 'http://localhost:5000').replace(/\/+$/, '');
 
 export function useSocket() {
     const socketRef = useRef(null);
@@ -9,6 +9,8 @@ export function useSocket() {
 
     useEffect(() => {
         const socket = io(SERVER_URL, {
+            transports: ['websocket', 'polling'],
+            withCredentials: true,
             autoConnect: true,
             reconnection: true,
             reconnectionAttempts: Infinity,
