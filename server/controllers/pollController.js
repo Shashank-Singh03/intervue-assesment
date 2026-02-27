@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pollService = require('../services/pollService');
 const voteService = require('../services/voteService');
+const { getPollHistory } = require('./pollHistoryController');
+
+// History endpoint (must be before :id param routes)
+router.get('/history', getPollHistory);
 
 // Get the currently active poll (with remaining time)
 router.get('/active', (req, res) => {

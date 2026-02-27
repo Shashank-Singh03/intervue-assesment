@@ -7,6 +7,7 @@ import StudentPoll from './components/StudentPoll';
 import StudentResults from './components/StudentResults';
 import TeacherCreatePoll from './components/TeacherCreatePoll';
 import TeacherLiveResults from './components/TeacherLiveResults';
+import PollHistory from './components/PollHistory';
 import StudentKicked from './components/StudentKicked';
 import FloatingChatButton from './components/FloatingChatButton';
 import './App.css';
@@ -250,6 +251,10 @@ export default function App() {
     setScreen('teacher-create');
   }, []);
 
+  const handleViewHistory = useCallback(() => {
+    setScreen('teacher-history');
+  }, []);
+
   // Render current screen
   const renderScreen = () => {
     switch (screen) {
@@ -285,7 +290,7 @@ export default function App() {
         return <StudentKicked />;
 
       case 'teacher-create':
-        return <TeacherCreatePoll onCreatePoll={handleCreatePoll} onBack={handleGoBack} />;
+        return <TeacherCreatePoll onCreatePoll={handleCreatePoll} onBack={handleGoBack} onViewHistory={handleViewHistory} />;
 
       case 'teacher-live':
         return (
@@ -294,8 +299,12 @@ export default function App() {
             results={results}
             onNewPoll={handleNewPoll}
             onBack={handleGoBack}
+            onViewHistory={handleViewHistory}
           />
         );
+
+      case 'teacher-history':
+        return <PollHistory onBack={() => setScreen('teacher-create')} />;
 
       default:
         return <RoleSelection onSelectRole={handleSelectRole} />;

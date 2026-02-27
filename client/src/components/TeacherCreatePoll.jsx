@@ -3,7 +3,7 @@ import './TeacherCreatePoll.css';
 
 const TIMER_OPTIONS = [15, 30, 45, 60, 90, 120];
 
-export default function TeacherCreatePoll({ onCreatePoll, onBack }) {
+export default function TeacherCreatePoll({ onCreatePoll, onBack, onViewHistory }) {
     const [question, setQuestion] = useState('');
     const [options, setOptions] = useState([
         { text: '', isCorrect: false },
@@ -42,7 +42,14 @@ export default function TeacherCreatePoll({ onCreatePoll, onBack }) {
     return (
         <div className="create-poll-page">
             <div className="create-poll-container">
-                <button className="back-btn" onClick={onBack}>← Back</button>
+                <div className="create-poll-top-row">
+                    <button className="back-btn" onClick={onBack}>← Back</button>
+                    {onViewHistory && (
+                        <button className="btn-view-history" onClick={onViewHistory}>
+                            ⏺ View Poll history
+                        </button>
+                    )}
+                </div>
                 <h1 className="create-heading">Create a New Question</h1>
                 <p className="create-subtitle">
                     Enter your question and add answer options. You can mark the correct answer and set a timer duration.

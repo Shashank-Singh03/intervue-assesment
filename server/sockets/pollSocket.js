@@ -1,5 +1,6 @@
 const pollService = require('../services/pollService');
 const voteService = require('../services/voteService');
+const PollHistory = require('../models/PollHistory');
 
 // Track connected students: { socketId: { name, role } }
 const connectedUsers = new Map();
@@ -78,6 +79,19 @@ function registerPollSocket(io) {
                     pollService.endPoll(poll.id);
                     const results = pollService.getPollResults(poll.id);
                     io.emit('poll:ended', { pollId: poll.id, results });
+
+                    // Save to MongoDB (fire-and-forget)
+                    try {
+                        const totalVotes = results.reduce((sum, r) => sum + r.count, 0);
+                        PollHistory.create({
+                            question: poll.question,
+                            options: results.map(r => ({ text: r.text, votes: r.count })),
+                            totalVotes,
+                            askedBy: 'Teacher',
+                        }).catch(err => console.error('Poll history save failed:', err.message));
+                    } catch (err) {
+                        console.error('Poll history save failed:', err.message);
+                    }
                 }
             }, remainingMs);
         });

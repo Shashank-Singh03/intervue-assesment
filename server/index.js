@@ -1,4 +1,6 @@
 console.log("BOOT: entry file loaded");
+const connectDB = require('./config/db');
+connectDB();
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');

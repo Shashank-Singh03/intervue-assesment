@@ -11,6 +11,13 @@
     width: 100%;
 }
 
+.create-poll-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
 .create-heading {
     font-size: 24px;
     font-weight: 700;

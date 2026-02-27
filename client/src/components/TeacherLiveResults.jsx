@@ -1,7 +1,7 @@
 import { usePollTimer } from '../hooks/usePollTimer';
 import './TeacherLiveResults.css';
 
-export default function TeacherLiveResults({ poll, results, onNewPoll, onBack }) {
+export default function TeacherLiveResults({ poll, results, onNewPoll, onBack, onViewHistory }) {
     const { formatted, isExpired } = usePollTimer(poll?.startTime, poll?.duration);
 
     if (!poll) return null;
@@ -10,7 +10,14 @@ export default function TeacherLiveResults({ poll, results, onNewPoll, onBack })
 
     return (
         <div className="teacher-results-page">
-            <button className="back-btn" onClick={onBack}>← Back</button>
+            <div className="create-poll-top-row">
+                <button className="back-btn" onClick={onBack}>← Back</button>
+                {onViewHistory && (
+                    <button className="btn-view-history" onClick={onViewHistory}>
+                        ⏺ View Poll history
+                    </button>
+                )}
+            </div>
             <div className="teacher-results-header">
                 <h2>Live Poll Results</h2>
                 <div className="teacher-timer">
