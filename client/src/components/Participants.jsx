@@ -20,6 +20,47 @@ export default function Participants({ participants = [], onKick, isTeacher, cha
         }
     };
 
+    // Students: chat only, no tabs
+    if (!isTeacher) {
+        return (
+            <div className="participants-panel">
+                <div className="participants-tabs">
+                    <button className="tab-btn active">Chat</button>
+                </div>
+                <div className="chat-section">
+                    <div className="chat-messages">
+                        {chatMessages.length === 0 && (
+                            <p className="chat-empty">No messages yet</p>
+                        )}
+                        {chatMessages.map((msg, idx) => (
+                            <div key={idx} className={`chat-msg ${msg.sender === userName ? 'chat-msg-own' : ''}`}>
+                                <span className={`chat-sender ${msg.role === 'teacher' ? 'chat-sender-teacher' : ''}`}>
+                                    {msg.sender}
+                                </span>
+                                <span className="chat-text">{msg.text}</span>
+                            </div>
+                        ))}
+                        <div ref={messagesEndRef} />
+                    </div>
+                    <form className="chat-input-row" onSubmit={handleSend}>
+                        <input
+                            type="text"
+                            className="chat-input"
+                            placeholder="Type a message..."
+                            value={chatInput}
+                            onChange={(e) => setChatInput(e.target.value)}
+                            maxLength={500}
+                        />
+                        <button type="submit" className="chat-send-btn" disabled={!chatInput.trim()}>
+                            Send
+                        </button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+
+    // Teachers: both tabs
     return (
         <div className="participants-panel">
             <div className="participants-tabs">
