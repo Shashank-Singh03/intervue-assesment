@@ -74,10 +74,10 @@ function registerPollSocket(io) {
 
             // Set timer to auto-end the poll
             setTimeout(() => {
-                const active = pollService.getActivePoll();
-                if (active && active.id === poll.id) {
-                    pollService.endPoll(poll.id);
-                    const results = pollService.getPollResults(poll.id);
+                // endPoll is idempotent — safe to call even if already expired
+                pollService.endPoll(poll.id);
+                const results = pollService.getPollResults(poll.id);
+                if (results) {
                     io.emit('poll:ended', { pollId: poll.id, results });
 
                     // Save to MongoDB (fire-and-forget)
