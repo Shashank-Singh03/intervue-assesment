@@ -1,0 +1,9 @@
+{
+    "name": "intervue-assessment",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node server/index.js",
+        "build": "npm install --prefix server"
+    }
+}
