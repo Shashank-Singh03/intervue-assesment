@@ -8,8 +8,8 @@ const { registerPollSocket } = require('./sockets/pollSocket');
 
 const ALLOWED_ORIGINS = [
   'http://localhost:5173',
-  process.env.CORS_ORIGIN,       // e.g. https://intervue-assesment.onrender.com
-].filter(Boolean);
+  ...(process.env.CORS_ORIGIN || '').split(',').map(s => s.trim()).filter(Boolean),
+];
 
 const app = express();
 

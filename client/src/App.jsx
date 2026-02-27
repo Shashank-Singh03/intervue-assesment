@@ -42,6 +42,29 @@ export default function App() {
     }
   }, []);
 
+  // Push browser history when screen changes (enables browser back button)
+  useEffect(() => {
+    if (screen !== 'role-select') {
+      window.history.pushState({ screen }, '', window.location.pathname);
+    }
+  }, [screen]);
+
+  // Listen for browser back button
+  useEffect(() => {
+    const handlePopState = () => {
+      setRole(null);
+      setStudentName('');
+      setActivePoll(null);
+      setResults(null);
+      setHasVoted(false);
+      setSelectedOption(null);
+      setScreen('role-select');
+      sessionStorage.removeItem('poll-state');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   // Persist state to sessionStorage
   useEffect(() => {
     sessionStorage.setItem('poll-state', JSON.stringify({
@@ -65,28 +88,28 @@ export default function App() {
     if (!socket) return;
 
     const handlePollState = (data) => {
-      if (data.poll) {
-        setActivePoll(data.poll);
-        if (data.hasVoted) {
-          setHasVoted(true);
+      if (!role || !data.poll) return;
+      setActivePoll(data.poll);
+      if (data.hasVoted) {
+        setHasVoted(true);
+      }
+      if (data.results) {
+        setResults(data.results);
+        if (role === 'student' && data.hasVoted) {
+          setScreen('student-results');
+        } else if (role === 'student') {
+          setScreen('student-poll');
+        } else if (role === 'teacher') {
+          setScreen('teacher-live');
         }
-        if (data.results) {
-          setResults(data.results);
-          if (role === 'student' && data.hasVoted) {
-            setScreen('student-results');
-          } else if (role === 'student') {
-            setScreen('student-poll');
-          } else if (role === 'teacher') {
-            setScreen('teacher-live');
-          }
-        } else {
-          if (role === 'student') setScreen('student-poll');
-          if (role === 'teacher') setScreen('teacher-live');
-        }
+      } else {
+        if (role === 'student') setScreen('student-poll');
+        if (role === 'teacher') setScreen('teacher-live');
       }
     };
 
     const handlePollStart = (data) => {
+      if (!role) return;
       setActivePoll(data.poll);
       setResults(null);
       setHasVoted(false);
@@ -156,6 +179,18 @@ export default function App() {
   }, [socket, on, off, role]);
 
   // Event handlers
+  const handleGoBack = useCallback(() => {
+    setRole(null);
+    setStudentName('');
+    setActivePoll(null);
+    setResults(null);
+    setHasVoted(false);
+    setSelectedOption(null);
+    setScreen('role-select');
+    sessionStorage.removeItem('poll-state');
+    window.history.back();
+  }, []);
+
   const handleSelectRole = useCallback((selectedRole) => {
     setRole(selectedRole);
     if (selectedRole === 'student') {
@@ -205,7 +240,7 @@ export default function App() {
         return <RoleSelection onSelectRole={handleSelectRole} />;
 
       case 'student-name':
-        return <StudentNameInput onSubmit={handleStudentNameSubmit} />;
+        return <StudentNameInput onSubmit={handleStudentNameSubmit} onBack={handleGoBack} />;
 
       case 'student-waiting':
         return <StudentWaiting />;
@@ -233,7 +268,7 @@ export default function App() {
         return <StudentKicked />;
 
       case 'teacher-create':
-        return <TeacherCreatePoll onCreatePoll={handleCreatePoll} />;
+        return <TeacherCreatePoll onCreatePoll={handleCreatePoll} onBack={handleGoBack} />;
 
       case 'teacher-live':
         return (
@@ -241,6 +276,7 @@ export default function App() {
             poll={activePoll}
             results={results}
             onNewPoll={handleNewPoll}
+            onBack={handleGoBack}
           />
         );
 

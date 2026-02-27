@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './StudentNameInput.css';
 
-export default function StudentNameInput({ onSubmit }) {
+export default function StudentNameInput({ onSubmit, onBack }) {
     const [name, setName] = useState('');
 
     const handleSubmit = (e) => {
@@ -14,6 +14,7 @@ export default function StudentNameInput({ onSubmit }) {
     return (
         <div className="name-input-page">
             <div className="name-input-card">
+                <button className="back-btn" onClick={onBack}>← Back</button>
                 <h1 className="name-heading">Let's Get Started</h1>
                 <p className="name-subtitle">
                     As a student, you'll be able to <strong>submit your answers</strong>, participate in live
