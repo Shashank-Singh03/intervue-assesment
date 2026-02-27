@@ -23,6 +23,7 @@ export default function App() {
   const [hasVoted, setHasVoted] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [error, setError] = useState(null);
+  const [chatMessages, setChatMessages] = useState([]);
 
   // Determine which screen to show
   const [screen, setScreen] = useState('role-select');
@@ -165,6 +166,15 @@ export default function App() {
     on('participants:update', handleParticipantsUpdate);
     on('student:kicked', handleKicked);
 
+    const handleChatMessage = (data) => {
+      setChatMessages(prev => [...prev, data.message]);
+    };
+    const handleChatHistory = (data) => {
+      setChatMessages(data.messages || []);
+    };
+    on('chat:message', handleChatMessage);
+    on('chat:history', handleChatHistory);
+
     return () => {
       off('poll:state', handlePollState);
       off('poll:start', handlePollStart);
@@ -175,6 +185,8 @@ export default function App() {
       off('poll:results-update', handleResultsUpdate);
       off('participants:update', handleParticipantsUpdate);
       off('student:kicked', handleKicked);
+      off('chat:message', handleChatMessage);
+      off('chat:history', handleChatHistory);
     };
   }, [socket, on, off, role]);
 
@@ -186,6 +198,7 @@ export default function App() {
     setResults(null);
     setHasVoted(false);
     setSelectedOption(null);
+    setChatMessages([]);
     setScreen('role-select');
     sessionStorage.removeItem('poll-state');
     window.history.back();
@@ -205,6 +218,10 @@ export default function App() {
     setStudentName(name);
     emit('student:join', { name });
     setScreen('student-waiting');
+  }, [emit]);
+
+  const handleSendChat = useCallback((message) => {
+    emit('chat:send', { message });
   }, [emit]);
 
   const handleVote = useCallback((optionIndex) => {
@@ -298,11 +315,14 @@ export default function App() {
         </div>
       )}
       {renderScreen()}
-      {role === 'teacher' && (
+      {role && (
         <FloatingChatButton
           participants={participants}
-          onKick={handleKick}
-          isTeacher
+          onKick={role === 'teacher' ? handleKick : undefined}
+          isTeacher={role === 'teacher'}
+          chatMessages={chatMessages}
+          onSendChat={handleSendChat}
+          userName={role === 'teacher' ? 'Teacher' : studentName}
         />
       )}
     </div>

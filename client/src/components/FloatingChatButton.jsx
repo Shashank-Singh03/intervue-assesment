@@ -2,14 +2,21 @@ import { useState } from 'react';
 import Participants from './Participants';
 import './FloatingChatButton.css';
 
-export default function FloatingChatButton({ participants, onKick, isTeacher }) {
+export default function FloatingChatButton({ participants, onKick, isTeacher, chatMessages, onSendChat, userName }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="floating-chat-wrapper">
             {isOpen && (
                 <div className="floating-panel">
-                    <Participants participants={participants} onKick={onKick} isTeacher={isTeacher} />
+                    <Participants
+                        participants={participants}
+                        onKick={onKick}
+                        isTeacher={isTeacher}
+                        chatMessages={chatMessages}
+                        onSendChat={onSendChat}
+                        userName={userName}
+                    />
                 </div>
             )}
             <button

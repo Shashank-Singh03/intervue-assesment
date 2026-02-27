@@ -4,6 +4,9 @@ const voteService = require('../services/voteService');
 // Track connected students: { socketId: { name, role } }
 const connectedUsers = new Map();
 
+// In-memory chat store (max 100 messages)
+const chatMessages = [];
+
 function registerPollSocket(io) {
     io.on('connection', (socket) => {
         console.log(`Connected: ${socket.id}`);
@@ -26,6 +29,9 @@ function registerPollSocket(io) {
                 });
             }
 
+            // Send chat history to newly joined student
+            socket.emit('chat:history', { messages: chatMessages });
+
             broadcastParticipants(io);
         });
 
@@ -43,6 +49,9 @@ function registerPollSocket(io) {
                     remainingMs: Math.max(0, data.poll.duration * 1000 - (Date.now() - data.poll.startTime)),
                 });
             }
+
+            // Send chat history to teacher
+            socket.emit('chat:history', { messages: chatMessages });
 
             broadcastParticipants(io);
         });
@@ -87,6 +96,26 @@ function registerPollSocket(io) {
             // Broadcast updated results to teachers
             const results = pollService.getPollResults(pollId);
             io.to('teachers').emit('poll:results-update', { pollId, results });
+        });
+
+        // Chat message
+        socket.on('chat:send', ({ message }) => {
+            const user = connectedUsers.get(socket.id);
+            if (!user) return;
+            const text = (message || '').trim();
+            if (!text || text.length > 500) return;
+
+            const msg = {
+                sender: user.name,
+                role: user.role,
+                text,
+                timestamp: Date.now(),
+            };
+
+            chatMessages.push(msg);
+            if (chatMessages.length > 100) chatMessages.shift();
+
+            io.emit('chat:message', { message: msg });
         });
 
         // Teacher kicks a student
