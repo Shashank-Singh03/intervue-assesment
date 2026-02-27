@@ -1,3 +1,4 @@
+console.log("BOOT: entry file loaded");
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -11,6 +12,12 @@ const ALLOWED_ORIGINS = [
 ].filter(Boolean);
 
 const app = express();
+
+// --- Render health check (must be early) ---
+app.get("/health", (_req, res) => {
+  res.status(200).send("OK");
+});
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -27,8 +34,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Render uptime health check
-app.get('/health', (_req, res) => res.status(200).send('OK'));
+
 
 // REST routes
 app.use('/api/poll', pollController);
